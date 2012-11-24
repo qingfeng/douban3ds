@@ -7,6 +7,10 @@ app = Flask(__name__)
 def login():
     return st('login.html', **locals())
 
+@app.route('/back')
+def back():
+    return 'Back'
+
 
 if __name__ == '__main__':
     port = 5000
