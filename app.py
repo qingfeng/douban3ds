@@ -24,7 +24,7 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
 def hash_name(names):
-    return " ".join("#%s#" % name for name in names)
+    return " ".join("#%s#" % name for name in names if name)
 
 @app.route('/login/')
 def login():
