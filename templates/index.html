@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+<div class="index_form">
+
+<p class="tal pb10">この画面から投稿したい画像とそれにつけるコメントを入力して送信すると、画像付きのツイートを投稿できます。</p>
+
+<form action="/new" method="post" enctype="multipart/form-data">
+<input type="hidden" value="{{code}}">
+<dl>
+<dt>画像や写真を選んでください（任意）</dt>
+<dd>
+<input type="file" name="image" />
+</dd>
+<dt>コメントを入力してください（必須）</dt>
+<dd>
+<input type="text" name="comment" class="comment" value="" />
+</dd>
+<dt>ハッシュタグを入力・選択してください（任意）</dt>
+<dd class="tal">
+<div class="mb10 new_hash clearfix">
+<p>新規入力：</p>
+<input type="text" name="hash[new1]" value="" />
+<input type="text" name="hash[new2]" value="" />
+<input type="text" name="hash[new3]" value="" />
+</div>
+</dd>
+</dl>
+<div class="submit">
+<input type="image" src="img/btn_tweet.gif" alt="この内容で送信する" />
+</div>
+</form>
+
+</div>
+
+{% endblock %}
