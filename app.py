@@ -35,8 +35,10 @@ def back():
 def new():
     code = request.form.get('code')
     image = request.files.get('image')
+    text = request.form.get('comment', '')
     client.auth_with_code(code)
-    client.miniblog.new(text, image=image)
+    #client.miniblog.new(text, image=image)
+    client.miniblog.new(text)
     return "Upload OK"
 
 if __name__ == '__main__':

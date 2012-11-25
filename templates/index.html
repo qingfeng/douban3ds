@@ -6,7 +6,7 @@
 <p class="tal pb10">この画面から投稿したい画像とそれにつけるコメントを入力して送信すると、画像付きのツイートを投稿できます。</p>
 
 <form action="/new" method="post" enctype="multipart/form-data">
-<input type="hidden" value="{{code}}">
+<input type="hidden" name="code" value="{{code}}">
 <dl>
 <dt>画像や写真を選んでください（任意）</dt>
 <dd>
