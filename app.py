@@ -53,7 +53,7 @@ def new():
     hash2 = request.form.get('hash[new2]', '')
     hash3 = request.form.get('hash[new3]', '')
 
-    if image and allowed_file(image.filename):
+    if image:
         fname = '/tmp/1.jpg'
         image.save(fname)
         hash_text = hash_name([hash1, hash2, hash3])
