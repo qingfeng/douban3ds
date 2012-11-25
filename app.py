@@ -5,6 +5,7 @@ from flask import render_template as st
 from douban_client import DoubanClient
 from douban_client.api.error import DoubanError
 
+from cStringIO import StringIO
 import os
 
 API_KEY = os.environ['API_KEY']
@@ -21,6 +22,9 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg'])
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+
+def hash_name(names):
+    return " ".join("#%s#" % name for name in names)
 
 @app.route('/login/')
 def login():
@@ -44,16 +48,24 @@ def new():
     client = DoubanClient(API_KEY, API_SECRET, CALLBACK, SCOPE)
     code = request.form.get('code')
     image = request.files.get('image')
-    text = request.form.get('comment', '')
-    client.auth_with_code(code)
+    comment = request.form.get('comment', '')
+    hash1 = request.form.get('hash[new1]', '')
+    hash2 = request.form.get('hash[new2]', '')
+    hash3 = request.form.get('hash[new3]', '')
+
     if image and allowed_file(image.filename):
-        from cStringIO import StringIO
-        image.save('/tmp/1.jpg')
+        fname = '/tmp/1.jpg'
+        image.save(fname)
+        hash_text = hash_name([hash1, hash2, hash3])
+        text = "%s %s" % (comment, hash_text)
         try:
-            client.miniblog.new(text, image=open('/tmp/1.jpg'))
+            client.auth_with_code(code)
+            client.miniblog.new(text, image=open(fname))
         except DoubanError:
             return redirect('/login')
-    return "Upload OK"
+        return "Upload OK"
+    else:
+        return "Error"
 
 if __name__ == '__main__':
     port = 5000
