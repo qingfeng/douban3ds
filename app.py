@@ -58,6 +58,7 @@ def new():
         image.save(fname)
         hash_text = hash_name([hash1, hash2, hash3])
         text = "%s %s" % (comment, hash_text)
+        text = text.encode("utf-8")
         try:
             client.auth_with_code(code)
             client.miniblog.new(text, image=open(fname))
