@@ -59,11 +59,11 @@ def new():
         hash_text = hash_name([hash1, hash2, hash3])
         text = "%s %s" % (comment, hash_text)
         text = text.encode("utf-8")
-        try:
-            client.auth_with_code(code)
-            client.miniblog.new(text, image=open(fname))
-        except DoubanError:
-            return redirect('/login')
+        #try:
+        client.auth_with_code(code)
+        client.miniblog.new(text, image=open(fname))
+        #except DoubanError:
+        #    return redirect('/login')
         return "Upload OK"
     else:
         return "Error"
