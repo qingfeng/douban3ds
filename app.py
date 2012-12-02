@@ -16,6 +16,7 @@ SCOPE = 'douban_basic_common,shuo_basic_r,shuo_basic_w'
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024
+app.debug = True
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg'])
 
